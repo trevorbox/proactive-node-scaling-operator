@@ -142,7 +142,7 @@ Define an image and tag. For example...
 
 ```shell
 export imageRepository="quay.io/redhat-cop/proactive-node-scaling-operator"
-export imageTag="$(git describe --tags --abbrev=0)" # grabs the most recent git tag, which should match the image tag
+export imageTag="$(git -c 'versionsort.suffix=-' ls-remote --exit-code --refs --sort='version:refname' --tags https://github.com/redhat-cop/proactive-node-scaling-operator.git '*.*.*' | tail --lines=1 | cut --delimiter='/' --fields=3)"
 ```
 
 Deploy chart...
